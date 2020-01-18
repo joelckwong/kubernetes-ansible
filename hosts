@@ -1,0 +1,10 @@
+[kubernetes-master-nodes]
+km1 ansible_host=192.168.0.210 kubernetes_role="master"
+
+[kubernetes-worker-nodes]
+ks1 ansible_host=192.168.0.212 kubernetes_role="node"
+ks2 ansible_host=192.168.0.213 kubernetes_role="node"
+
+[kubernetes:children]
+kubernetes-master-nodes
+kubernetes-worker-nodes

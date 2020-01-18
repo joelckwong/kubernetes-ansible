@@ -1,0 +1,19 @@
+- hosts: kubernetes-master-nodes
+  become: yes
+  tasks:
+  - name: ensure k8 master api port is accessible
+    firewalld:
+      port: 6443/tcp
+      permanent: yes
+      immediate: yes
+      state: enabled
+
+- hosts: all
+  become: yes
+  vars:
+    kubernetes_allow_pods_on_master: false
+    swap_file_state: absent
+  roles:
+    - geerlingguy.swap
+    - geerlingguy.docker
+    - geerlingguy.kubernetes
